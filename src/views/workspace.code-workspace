@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "..\\.."
+		},
+		{
+			"path": "..\\..\\..\\emp-manage"
+		},
+		{
+			"path": "..\\..\\..\\vue-cli"
+		},
+		{
+			"path": "..\\..\\..\\vue-material-dashboard-master"
+		}
+	],
+	"settings": {}
+}

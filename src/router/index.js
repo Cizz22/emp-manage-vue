@@ -1,5 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/Home'
+import About from '../views/About'
+import Login from '../views/Login'
+import Register from '../views/Register'
+import Dashboard from '../views/Dashboard'
+import Departement from '../views/Departement'
+import Employee from '../views/Employee'
+import store from '../store'
 
 const routes = [
   {
@@ -8,13 +15,56 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['auth/authenticated']) {
+        return next({
+          name : 'Login'
+        })
+      }
+
+      next()
+    }
+  },
+  {
+    path: '/departement',
+    name: 'Departement',
+    component: Departement,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['auth/authenticated']) {
+        return next({
+          name : 'Login'
+        })
+      }
+
+      next()
+    }
+  },
+  {
+    path: '/employee',
+    name: 'Employee',
+    component: Employee,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['auth/authenticated']) {
+        return next({
+          name : 'Login'
+        })
+      }
+      next()
+    }
+  },
 ]
 
 const router = createRouter({
